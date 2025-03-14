@@ -9,6 +9,6 @@ class CategoryRepository implements CategoryRepositoryInterface {
         return 'Hello';
     }
     public function find(int $id) {
-        return 'Hello';
+        return 'Hello World';
     }
 }
