@@ -24,11 +24,12 @@ class ProductController extends Controller
     }
 
     public function show(int $id): JsonResponse {
-        $product = $this->productRepository->find($id);
-        if (!$product) {
+        try {
+            $product = $this->productRepository->find($id);
+            return response()->json(new ProductBO($product));
+        } catch (\Exception $exception) {
             return response()->json(['error' => 'Product not found'], 404);
         }
-        return response()->json(new ProductBO($product));
     }
 
     public function store(StoreProductRequest $request): JsonResponse

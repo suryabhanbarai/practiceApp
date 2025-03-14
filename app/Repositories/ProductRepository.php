@@ -1,34 +1,28 @@
 <?php
 namespace App\Repositories;
 
-use App\Exceptions\customException;
 use App\Models\Product;
 use App\Interfaces\ProductRepositoryInterface;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductRepository implements ProductRepositoryInterface {
-    public function all(?int $categoryId = null, int $perPage = 10): array {
+    public function all(?int $categoryId = null): array {
         $query = Product::query();
         if ($categoryId) {
             $query->where('category_id', $categoryId);
         }
-        return $query->paginate($perPage)->toArray();
+        return $query->get()->toArray();
     }
     public function find(int $id): ?array {
-        return Product::find($id)->toArray();
+        $product = Product::find($id);
+        return $product ? $product->toArray() : array();
     }
     public function create(array $data): array {
         return Product::create($data)->toArray();
     }
     public function update(int $id, array $data): array {
-        try {
-            $product = Product::findOrFail($id);
-            $product->update($data);
-            return $product->toArray();
-        }
-        catch (\Exception $exception) {
-            return ['error' => $exception->getMessage(), 'code' => 422];
-        }
+        $product = Product::findOrFail($id);
+        $product->update($data);
+        return $product->toArray();
     }
     public function delete(int $id): bool {
         return Product::destroy($id) > 0;
