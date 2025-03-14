@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\customException;
 use Illuminate\Http\Request;
 use App\BusinessObjects\ProductBO;
 use App\Http\Requests\StoreProductRequest;
