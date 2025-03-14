@@ -13,6 +13,6 @@ class CategoryController extends Controller
     }
 
     public function index() {
-        return $this->categoryRepository->find(100);
+        return $this->categoryRepository->find(2);
     }
 }

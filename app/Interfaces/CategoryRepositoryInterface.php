@@ -4,6 +4,6 @@ namespace App\Interfaces;
 
 interface CategoryRepositoryInterface
 {
-    public function all();
-    public function find(int $id);
+    public function all(): array;
+    public function find(int $id): ?array;
 }
