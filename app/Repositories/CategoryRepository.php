@@ -5,10 +5,10 @@ use App\Models\Category;
 use App\Interfaces\CategoryRepositoryInterface;
 
 class CategoryRepository implements CategoryRepositoryInterface {
-    public function all(?int $categoryId = null, int $perPage = 10) {
-        return 'Hello';
+    public function all(): array {
+        return Category::with(['children'])->get()->toArray();
     }
-    public function find(int $id) {
-        return Category::all()->find($id);
+    public function find(int $id): ?array {
+        return Category::all()->find($id)->toArray();
     }
 }
