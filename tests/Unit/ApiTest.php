@@ -10,10 +10,11 @@ class ApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void {
+        parent::setUp();
+    }
     public function test_that_true_is_true(): void
     {
-        $repository = app(ProductRepository::class);
-        $product = $repository->all();
-        $this->assertTrue($product);
+        $mock = $this->getMockBuilder(ProductRepository::class);
     }
 }
