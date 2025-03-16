@@ -5,12 +5,12 @@ use App\Models\Product;
 use App\Interfaces\ProductRepositoryInterface;
 
 class ProductRepository implements ProductRepositoryInterface {
-    public function all(?int $categoryId = null): array {
+    public function all(?int $categoryId = null, int $perPage = 10): array {
         $query = Product::query();
         if ($categoryId) {
             $query->where('category_id', $categoryId);
         }
-        return $query->get()->toArray();
+        return $query->paginate($perPage)->toArray();
     }
     public function find(int $id): ?array {
         $product = Product::find($id);
